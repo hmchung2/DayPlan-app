@@ -13,6 +13,7 @@ import {
   ScrollView,
   Alert,
   BackHandler,
+  Platform,
 } from "react-native";
 import { theme } from "./colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -68,16 +69,19 @@ export default function App() {
 
   const loadToDos = async () => {
     const s = await AsyncStorage.getItem(STORAGE_KEY);
+    if (s) {
+      setToDos(JSON.parse(s));
+    }
     console.log(s);
-
-    setToDos(JSON.parse(s));
   };
 
   const loadStatus = async () => {
     console.log("loading Status");
     const s = await AsyncStorage.getItem(STATUS_KEY);
-    console.log(s);
-    setWorking(JSON.parse(s));
+    if (s) {
+      console.log(s);
+      setWorking(JSON.parse(s));
+    }
   };
 
   const editTodo = async (key) => {
@@ -137,40 +141,48 @@ export default function App() {
     setEditingKey("");
   };
 
-  const deleteTodo = (key) => {
-    Alert.alert("Delete to Do? ", "Are you sure?", [
-      { text: "Cancel" },
-      {
-        text: "Yes",
-        onPress: async () => {
-          const newTodos = { ...toDos };
-          delete newTodos[key];
-          console.log("deleting");
-          setToDos(newTodos);
-          console.log(toDos);
-          await saveToDos(newTodos);
+  const deleteTodo = async (key) => {
+    if (Platform.OS === "web") {
+      const ok = confirm("Do  you want to delete this To Do?");
+      if (ok) {
+        const newTodos = { ...toDos };
+        delete newTodos[key];
+        setToDos(newTodos);
+        await saveToDos(newTodos);
+      }
+    } else {
+      Alert.alert("Delete to Do? ", "Are you sure?", [
+        { text: "Cancel" },
+        {
+          text: "Yes",
+          onPress: async () => {
+            const newTodos = { ...toDos };
+            delete newTodos[key];
+            setToDos(newTodos);
+            await saveToDos(newTodos);
+          },
         },
-      },
-    ]);
+      ]);
+    }
   };
 
-  const handleBackButtonClick = () => {
-    console.log("back Button Clicked");
-    cancelEdit();
-    return true;
-  };
+  // const handleBackButtonClick = () => {
+  //   console.log("back Button Clicked");
+  //   cancelEdit();
+  //   return true;
+  // };
 
   //console.log(toDos);
   useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
+    //BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
     loadStatus();
     loadToDos();
-    return () => {
-      BackHandler.removeEventListener(
-        "hardwareBackPress",
-        handleBackButtonClick
-      );
-    };
+    // return () => {
+    //   BackHandler.removeEventListener(
+    //     "hardwareBackPress",
+    //     handleBackButtonClick
+    //   );
+    // };
   }, []);
 
   return (
