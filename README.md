@@ -4,5 +4,9 @@
 
 library
 
-
 expo install @react-native-async-storage/async-storage
+
+build an app.
+
+expo build:android
+expo build:ios
