@@ -27,3 +27,5 @@ other method ->
 git init
 git remote add origin github_url
 yarn add -D gh-pages
+
+https://expo.dev/@hmchung2/worktravel
