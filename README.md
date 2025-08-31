@@ -11,8 +11,6 @@ React Native 학습을 기반으로, 실제 서비스처럼 동작하는 모바�
 - **AsyncStorage** 를 통한 로컬 데이터 영구 저장  
 - 간단한 UI/UX를 통한 사용자 친화적 앱  
 
-👉 [실제 앱 데모 (Expo)](https://expo.dev/@hmchung2/worktravel)
-
 ---
 
 ## ✨ 주요 기능
