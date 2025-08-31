@@ -25,7 +25,7 @@ React Native 학습을 기반으로, 실제 서비스처럼 동작하는 모바�
 
 ## 📸 스크린샷
 <p align="center">
-  <img src="images/dayplan1.png" width="300"/>
+  <img src="images/dayplan1.png" width="550"/>
 </p>
 
 <p align="center">
