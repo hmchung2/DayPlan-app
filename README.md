@@ -23,6 +23,14 @@ React Native 학습을 기반으로, 실제 서비스처럼 동작하는 모바�
 
 ---
 
+## 📸 스크린샷
+<p align="center">
+  <img src="images/dayplan1.png" width="250" />
+  <img src="images/dayplan2.png" width="250" />
+</p>
+
+---
+
 ## 🛠 기술 스택
 - **Framework** : React Native, Expo  
 - **Language** : JavaScript (ES6)  
